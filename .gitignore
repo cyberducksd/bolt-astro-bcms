@@ -7,6 +7,9 @@ dist/
 # dependencies
 node_modules/
 
+# lockfiles (keep package-lock.json or bun.lockb but not both in commits)
+bun.lockb
+
 # logs
 npm-debug.log*
 yarn-debug.log*

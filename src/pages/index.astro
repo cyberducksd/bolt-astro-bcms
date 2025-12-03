@@ -1,11 +1,268 @@
 ---
-import Welcome from '../components/Welcome.astro';
+/**
+ * Bun Marketing Website Example
+ * 
+ * This page demonstrates component-driven development with Astro and Bun.
+ * Learn how reusable components can be composed to create marketing pages.
+ */
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import CodeExample from '../components/CodeExample.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Footer from '../components/Footer.astro';
+import background from '../assets/background.svg';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Bun - The Fast All-in-One JavaScript Runtime">
+	<div class="page-wrapper">
+		<img class="background" src={background.src} alt="" aria-hidden="true" />
+		
+		<Navbar />
+		
+		<main>
+			<Hero 
+				title="Develop, test, run, and bundle JavaScript & TypeScript projects—all with Bun"
+				subtitle="Bun is an all-in-one toolkit for JavaScript and TypeScript apps. It ships as a single executable called bun."
+				ctaText="Install Bun"
+				ctaLink="https://bun.sh/docs/installation"
+				secondaryText="Read the Docs"
+				secondaryLink="https://bun.sh/docs"
+			/>
+
+			<section class="code-section">
+				<div class="code-container">
+					<h2 class="section-title">Get started in seconds</h2>
+					<CodeExample title="Terminal" language="bash">
+curl -fsSL https://bun.sh/install | bash
+
+# Create a new project
+bun init
+
+# Install dependencies (blazingly fast!)
+bun install
+
+# Run your app
+bun run index.ts
+					</CodeExample>
+				</div>
+			</section>
+
+			<Features 
+				id="features"
+				title="Why developers love Bun"
+				subtitle="Built from scratch with performance in mind, Bun is designed to be the all-in-one tool for modern JavaScript development."
+			>
+				<FeatureCard title="⚡ Blazingly Fast" icon="">
+					<p>Bun starts up to 4x faster than Node.js. Install packages 25x faster than npm. Run TypeScript and JSX directly without transpiling.</p>
+				</FeatureCard>
+				
+				<FeatureCard title="🔧 All-in-One Toolkit" icon="">
+					<p>Package manager, bundler, test runner, and runtime—all in one. No more juggling between npm, webpack, jest, and node.</p>
+				</FeatureCard>
+				
+				<FeatureCard title="📦 Native TypeScript" icon="">
+					<p>Run TypeScript and JSX files directly without configuration. Bun's transpiler is written in Zig for maximum speed.</p>
+				</FeatureCard>
+				
+				<FeatureCard title="🔌 Node.js Compatible" icon="">
+					<p>Drop-in replacement for Node.js. Most npm packages work out of the box. Implements node:fs, node:path, and more.</p>
+				</FeatureCard>
+				
+				<FeatureCard title="🧪 Built-in Test Runner" icon="">
+					<p>Jest-compatible test runner built into Bun. Write tests using familiar patterns with zero configuration required.</p>
+				</FeatureCard>
+				
+				<FeatureCard title="🌐 Web Standard APIs" icon="">
+					<p>Built-in support for fetch, WebSocket, ReadableStream, and other Web APIs. Write code that works everywhere.</p>
+				</FeatureCard>
+			</Features>
+
+			<section class="comparison-section">
+				<div class="comparison-container">
+					<h2 class="section-title">See the difference</h2>
+					<p class="section-subtitle">Bun's performance speaks for itself</p>
+					
+					<div class="benchmarks">
+						<div class="benchmark-item">
+							<div class="benchmark-label">Install dependencies</div>
+							<div class="benchmark-bars">
+								<div class="benchmark-bar bun-bar" style="width: 100%;">
+									<span>Bun: 0.8s</span>
+								</div>
+								<div class="benchmark-bar npm-bar" style="width: 25%;">
+									<span>npm: 20s</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="benchmark-item">
+							<div class="benchmark-label">Start time</div>
+							<div class="benchmark-bars">
+								<div class="benchmark-bar bun-bar" style="width: 100%;">
+									<span>Bun: 6ms</span>
+								</div>
+								<div class="benchmark-bar npm-bar" style="width: 25%;">
+									<span>Node: 24ms</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="benchmark-item">
+							<div class="benchmark-label">Run TypeScript</div>
+							<div class="benchmark-bars">
+								<div class="benchmark-bar bun-bar" style="width: 100%;">
+									<span>Bun: Native</span>
+								</div>
+								<div class="benchmark-bar npm-bar" style="width: 35%;">
+									<span>Node: Needs transpiler</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<CallToAction 
+				title="Ready to build faster?"
+				description="Join thousands of developers who have already switched to Bun for a better development experience."
+				buttonText="Install Bun Now"
+				buttonLink="https://bun.sh/docs/installation"
+			/>
+		</main>
+
+		<Footer 
+			brandName="Bun"
+			links={[
+				{ text: "Documentation", href: "https://bun.sh/docs" },
+				{ text: "GitHub", href: "https://github.com/oven-sh/bun" },
+				{ text: "Discord", href: "https://bun.sh/discord" },
+				{ text: "Blog", href: "https://bun.sh/blog" }
+			]}
+		/>
+	</div>
 </Layout>
+
+<style>
+	.page-wrapper {
+		position: relative;
+		min-height: 100vh;
+	}
+
+	.background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(80px);
+		opacity: 0.7;
+		object-fit: cover;
+	}
+
+	main {
+		position: relative;
+	}
+
+	.section-title {
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		font-weight: 800;
+		color: #1a1a1a;
+		margin: 0 0 0.5rem 0;
+		text-align: center;
+	}
+
+	.section-subtitle {
+		font-size: 1.1rem;
+		color: #666;
+		text-align: center;
+		margin: 0 0 2rem 0;
+	}
+
+	.code-section {
+		padding: 2rem;
+	}
+
+	.code-container {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	.comparison-section {
+		padding: 4rem 2rem;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.comparison-container {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+	}
+
+	.benchmarks {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.benchmark-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.benchmark-label {
+		font-weight: 600;
+		color: #1a1a1a;
+		font-size: 0.95rem;
+	}
+
+	.benchmark-bars {
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
+	}
+
+	.benchmark-bar {
+		height: 32px;
+		border-radius: 6px;
+		display: flex;
+		align-items: center;
+		padding: 0 1rem;
+		font-size: 0.85rem;
+		font-weight: 500;
+		min-width: fit-content;
+	}
+
+	.bun-bar {
+		background: linear-gradient(135deg, #f5deb3 0%, #d2b48c 100%);
+		color: #4a3728;
+	}
+
+	.npm-bar {
+		background: #e5e5e5;
+		color: #666;
+	}
+
+	@media (max-width: 640px) {
+		.code-section,
+		.comparison-section {
+			padding: 2rem 1rem;
+		}
+
+		.comparison-container {
+			padding: 1.5rem;
+		}
+
+		.benchmark-bar {
+			font-size: 0.75rem;
+			height: 28px;
+		}
+	}
+</style>

@@ -1,0 +1,125 @@
+---
+/**
+ * Hero Component
+ * A reusable hero section for landing pages
+ * Demonstrates component-driven development with Astro and Bun
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  secondaryText?: string;
+  secondaryLink?: string;
+}
+
+const { 
+  title, 
+  subtitle, 
+  ctaText = "Get Started", 
+  ctaLink = "#",
+  secondaryText,
+  secondaryLink 
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">{title}</h1>
+    {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+    <div class="hero-actions">
+      <a href={ctaLink} class="btn btn-primary">{ctaText}</a>
+      {secondaryText && secondaryLink && (
+        <a href={secondaryLink} class="btn btn-secondary">{secondaryText}</a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #666;
+    max-width: 600px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #f5deb3 0%, #d2b48c 100%);
+    color: #4a3728;
+    box-shadow: 0 4px 14px rgba(210, 180, 140, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 180, 140, 0.5);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #4a3728;
+    border: 2px solid #d2b48c;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(210, 180, 140, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 2rem 1rem;
+    }
+    
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

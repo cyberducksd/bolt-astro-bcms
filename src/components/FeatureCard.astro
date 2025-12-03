@@ -1,0 +1,59 @@
+---
+/**
+ * FeatureCard Component
+ * A reusable card for displaying features
+ * Demonstrates props and slot usage in Astro
+ */
+interface Props {
+  title: string;
+  icon?: string;
+}
+
+const { title, icon } = Astro.props;
+---
+
+<div class="feature-card">
+  {icon && <div class="feature-icon">{icon}</div>}
+  <h3 class="feature-title">{title}</h3>
+  <div class="feature-description">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .feature-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(210, 180, 140, 0.2);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .feature-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .feature-description :global(p) {
+    margin: 0;
+  }
+</style>
