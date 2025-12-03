@@ -1,0 +1,91 @@
+---
+/**
+ * CodeExample Component
+ * Displays code snippets with syntax highlighting appearance
+ * Demonstrates static content with styling in Astro
+ */
+interface Props {
+  title?: string;
+  language?: string;
+}
+
+const { title, language = "typescript" } = Astro.props;
+---
+
+<div class="code-example">
+  {title && (
+    <div class="code-header">
+      <span class="code-title">{title}</span>
+      <span class="code-language">{language}</span>
+    </div>
+  )}
+  <pre class="code-block"><code><slot /></code></pre>
+</div>
+
+<style>
+  .code-example {
+    background: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #2d2d2d;
+    border-bottom: 1px solid #3d3d3d;
+  }
+
+  .code-title {
+    color: #ccc;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .code-language {
+    color: #888;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .code-block {
+    margin: 0;
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-family: 'SF Mono', 'Fira Code', 'Monaco', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .code-block code {
+    color: #d4d4d4;
+    white-space: pre;
+  }
+
+  .code-block :global(.keyword) {
+    color: #569cd6;
+  }
+
+  .code-block :global(.string) {
+    color: #ce9178;
+  }
+
+  .code-block :global(.function) {
+    color: #dcdcaa;
+  }
+
+  .code-block :global(.comment) {
+    color: #6a9955;
+  }
+
+  @media (max-width: 640px) {
+    .code-block {
+      padding: 1rem;
+      font-size: 0.8rem;
+    }
+  }
+</style>

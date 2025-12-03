@@ -1,0 +1,66 @@
+---
+/**
+ * Features Component
+ * A section to display multiple feature cards in a grid
+ * Demonstrates component composition in Astro
+ */
+interface Props {
+  title?: string;
+  subtitle?: string;
+  id?: string;
+}
+
+const { title, subtitle, id } = Astro.props;
+---
+
+<section class="features" id={id}>
+  {(title || subtitle) && (
+    <div class="features-header">
+      {title && <h2 class="features-title">{title}</h2>}
+      {subtitle && <p class="features-subtitle">{subtitle}</p>}
+    </div>
+  )}
+  <div class="features-grid">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .features-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 1rem 0;
+  }
+
+  .features-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    .features {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
