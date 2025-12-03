@@ -7,12 +7,13 @@
 interface Props {
   title?: string;
   subtitle?: string;
+  id?: string;
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, id } = Astro.props;
 ---
 
-<section class="features">
+<section class="features" id={id}>
   {(title || subtitle) && (
     <div class="features-header">
       {title && <h2 class="features-title">{title}</h2>}
